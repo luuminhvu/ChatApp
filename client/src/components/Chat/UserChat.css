@@ -1,0 +1,145 @@
+.user-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid #ccc;
+  min-width: 120px;
+  width: 280px;
+  margin-bottom: 1rem;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+.user-img img {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.5rem;
+}
+.user-info {
+  flex-shrink: 0;
+}
+
+.user-info .user-name {
+  font-weight: 600;
+}
+
+.user-info .user-message {
+  font-size: 0.8rem;
+  color: #777;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status-notification {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.status-date {
+  color: wheat;
+  font-weight: 600;
+}
+
+.status-new__notification {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: #3f51b5;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+}
+
+.status-online {
+  background-color: #34d399;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+}
+.all-users {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.potentialchat__name {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  color: #34d399;
+}
+
+.potential-user__img {
+  position: relative;
+}
+
+.potential-user__img img {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.5rem;
+}
+
+.potential-status__online {
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: #34d399;
+  border-radius: 50%;
+  position: absolute;
+  right: 13px;
+  top: 3px;
+}
+.chat-box {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #1b1515;
+}
+
+.chat-box__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  background-color: #155ee5;
+}
+
+.chat-box__header__name {
+  font-weight: bold;
+  color: #19cc2e;
+}
+
+.chat-box__messages {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.chat-box__message {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.chat-box__message__text {
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+
+.chat-box__message__date {
+  font-size: 0.8rem;
+  color: #888;
+}
