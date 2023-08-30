@@ -106,6 +106,8 @@
   border-radius: 8px;
   padding: 1rem;
   background-color: #1b1515;
+  height: calc(100vh - 14rem);
+  overflow: hidden;
 }
 
 .chat-box__header {
@@ -125,6 +127,11 @@
 .chat-box__messages {
   display: flex;
   flex-direction: column-reverse;
+  color: #19cc2e;
+  overflow-y: scroll;
+  height: calc(100vh - 20rem);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .chat-box__message {
@@ -133,10 +140,25 @@
   padding: 0.5rem;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
+.chat-box__message__sender {
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+  background-color: #155ee5;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+.chat-box__message__receiver {
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+  background-color: #910873;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
 
 .chat-box__message__text {
   font-size: 0.9rem;
   margin-bottom: 0.2rem;
+  font-weight: 700;
 }
 
 .chat-box__message__date {
