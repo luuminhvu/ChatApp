@@ -12,7 +12,10 @@ export const ChatContextProvider = ({ children, user }) => {
   const [messages, setMessages] = useState(null);
   const [messageLoading, setMessageLoading] = useState(false);
   const [messageError, setMessageError] = useState(null);
-  console.log(messages);
+  // eslint-disable-next-line no-unused-vars
+  const [sendTextMessageError, setSendTextMessageError] = useState(null);
+  // eslint-disable-next-line no-unused-vars
+  const [newMessage, setNewMessage] = useState(null);
   useEffect(() => {
     const getUsers = async () => {
       const response = await getRequest(`${BaseUrl}/users`);
@@ -70,7 +73,23 @@ export const ChatContextProvider = ({ children, user }) => {
     };
     getMessages();
   }, [currentChat]);
-
+  const sendTextMessage = useCallback(
+    async (textMessage, sender, currentChatId, setTextMessage) => {
+      if (!textMessage) return console.log("No message to send");
+      const response = await postRequest(`${BaseUrl}/messages`, {
+        chatId: currentChatId,
+        senderId: sender._id,
+        text: textMessage,
+      });
+      if (response.error) {
+        return setSendTextMessageError(response.error);
+      }
+      setNewMessage(response);
+      setMessages((prev) => [...prev, response]);
+      setTextMessage("");
+    },
+    []
+  );
   const createChat = useCallback(async (firstId, secondId) => {
     const response = await postRequest(`${BaseUrl}/chats`, {
       firstId,
@@ -99,6 +118,7 @@ export const ChatContextProvider = ({ children, user }) => {
         messages,
         messageLoading,
         messageError,
+        sendTextMessage,
       }}
     >
       {children}
