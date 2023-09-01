@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useCallback, useEffect, useState } from "react";
 import { BaseUrl, getRequest, postRequest } from "../utils/services";
+import { io } from "socket.io-client";
 export const ChatContext = createContext();
 
 export const ChatContextProvider = ({ children, user }) => {
@@ -16,6 +17,40 @@ export const ChatContextProvider = ({ children, user }) => {
   const [sendTextMessageError, setSendTextMessageError] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [newMessage, setNewMessage] = useState(null);
+  // eslint-disable-next-line no-unused-vars
+  const [socket, setSocket] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+
+  useEffect(() => {
+    const newSocket = io("http://localhost:3000");
+    setSocket(newSocket);
+    return () => newSocket.disconnect();
+  }, [user]);
+  useEffect(() => {
+    if (socket === null) return;
+    socket.emit("addNewUser", user?._id);
+    socket.on("getOnlineUsers", (res) => {
+      setOnlineUsers(res);
+    });
+    return () => socket.off("getOnlineUsers");
+  }, [socket]);
+  //sendMessage
+  useEffect(() => {
+    if (socket === null) return;
+    const recipientId = currentChat?.members?.find((m) => m !== user?._id);
+    socket.emit("sendMessage", { ...newMessage, recipientId });
+  }, [newMessage, socket, currentChat, user]);
+  //receiveMessage
+  useEffect(() => {
+    if (socket === null) return;
+    socket.on("getMessage", (res) => {
+      if (currentChat?._id !== res.chatId) {
+        return console.log("Wrong chat");
+      }
+      setMessages((prev) => [...prev, res]);
+    });
+  }, [socket, currentChat]);
+
   useEffect(() => {
     const getUsers = async () => {
       const response = await getRequest(`${BaseUrl}/users`);
@@ -119,6 +154,7 @@ export const ChatContextProvider = ({ children, user }) => {
         messageLoading,
         messageError,
         sendTextMessage,
+        onlineUsers,
       }}
     >
       {children}
