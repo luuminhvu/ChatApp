@@ -18,6 +18,11 @@ io.on("connection", (socket) => {
     );
     if (user) {
       io.to(user.socketId).emit("getMessage", message);
+      io.to(socket.id).emit("getNotification", {
+        senderId: message.recipientId,
+        isRead: false,
+        date: new Date(),
+      });
     }
   });
 

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Container, Nav, Navbar, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../store/authContext";
+import Notification from "./Chat/Notification";
 const NavBar = () => {
   const { user, logoutUser } = useContext(AuthContext);
   return (
@@ -25,6 +26,7 @@ const NavBar = () => {
         <Nav>
           {user ? (
             <Stack direction="horizontal" gap={3}>
+              <Notification />
               <span
                 style={{
                   color: "#166dc1",
