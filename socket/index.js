@@ -1,5 +1,5 @@
 const { Server } = require("socket.io");
-const io = new Server({ cors: { origin: "http://localhost:5173" } }); // Fixed cors configuration
+const io = new Server({ cors: { origin: "https://chatapplmv.netlify.app" } }); // Fixed cors configuration
 let onlineUsers = [];
 
 io.on("connection", (socket) => {
